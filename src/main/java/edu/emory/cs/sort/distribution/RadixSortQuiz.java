@@ -11,7 +11,6 @@ public class RadixSortQuiz extends RadixSort {
     public void sort(Integer[] array, int beginIndex, int endIndex) {
         int maxBit = getMaxBit(array, beginIndex, endIndex);
         sort(array, beginIndex, endIndex, maxBit);
-        int debug = 0;
     }
 
     private void sort(Integer[] array, int beginIndex, int endIndex, int maxBit) {
@@ -35,7 +34,6 @@ public class RadixSortQuiz extends RadixSort {
         int index7 = index6 + buckets.get(7).size();
         int index8 = index7 + buckets.get(8).size();
         int index9 = index8 + buckets.get(9).size();
-        int mn = 0;
         for (Deque<Integer> bucket : buckets){ // go through each bucket
             while(!bucket.isEmpty() && beginIndex < array.length) {
                 array[beginIndex++] = bucket.remove();
@@ -56,26 +54,5 @@ public class RadixSortQuiz extends RadixSort {
         }
     }
 
-    /**
-     sort(array, 0, index0, maxBit);
-     sort(array, index0, index1, maxBit);
-     sort(array, index1, index2, maxBit);
-     sort(array, index2, index3, maxBit);
-     sort(array, index3, index4, maxBit);
-     sort(array, index4, index5, maxBit);
-     sort(array, index5, index6, maxBit);
-     sort(array, index6, index7, maxBit);
-     sort(array, index7, index8, maxBit);
-     sort(array, index8, index9, maxBit);
-     */
-    public static void main(String[] args) {
-        Integer[] array = {100, 10, 234, 481, 84, 851, 2, 28, 43, 3, 48};
-        RadixSortQuiz me = new RadixSortQuiz();
-        me.sort(array, 0, array.length);
-        for (int element : array){
-            System.out.println(element);
-        }
-
-    }
 }
 
