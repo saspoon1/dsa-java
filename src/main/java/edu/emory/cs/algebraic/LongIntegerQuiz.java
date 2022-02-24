@@ -5,7 +5,6 @@ public class LongIntegerQuiz extends LongInteger{
     protected void addDifferentSign(LongInteger n){
         int m = Math.max(digits.length, n.digits.length);
         byte[] result = new byte[m];
-
         // identify which LongInteger is bigger
         int findLarger = compareAbs(n);
         if (findLarger < 0 ) {
@@ -24,7 +23,6 @@ public class LongIntegerQuiz extends LongInteger{
         else if (findLarger > 0){
             //n is smaller, so this is copied into result.
             System.arraycopy(digits, 0, result, 0, digits.length);
-
             // subtract n from result
             for (int i = 1; i <= n.digits.length; i++){
                 result[i-1] -= n.digits[i-1];
@@ -32,7 +30,6 @@ public class LongIntegerQuiz extends LongInteger{
                     result[i-1] += 10;
                     result[i] -= 1;
                 }
-
             }
         }
         else{
@@ -49,6 +46,7 @@ public class LongIntegerQuiz extends LongInteger{
         }
         digits = needToRemoveZeros ? Arrays.copyOf(result, m) : result;
     }
+
 
     static public void main(String[] args) {
         LongInteger x = new LongInteger("999");
