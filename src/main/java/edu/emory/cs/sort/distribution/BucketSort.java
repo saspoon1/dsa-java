@@ -12,8 +12,6 @@ public abstract class BucketSort<T extends Comparable<T>> extends AbstractSort<T
      * seems to be faster than radix sort.
      */
 
-
-
     /**
      *
      * @param numBuckets the total number of buckets.
@@ -24,7 +22,6 @@ public abstract class BucketSort<T extends Comparable<T>> extends AbstractSort<T
         //creates a predefined number of buckets
         buckets = Stream.generate (ArrayDeque<T>::new).limit(numBuckets).collect(Collectors.toList());
     }
-
     /**
      * Takes a comparable key and returns the appropriate bucket index of the key
      * @param array       the input array
