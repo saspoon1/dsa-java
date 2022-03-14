@@ -1,13 +1,32 @@
-package edu.emory.cs.tree;
+/*
+ * Copyright 2020 Emory University
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package edu.emory.cs.tree.balanced;
 
+
+import edu.emory.cs.tree.AbstractBinaryNode;
+
+/**
+ * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
+ */
 public class AVLNode<T extends Comparable<T>> extends AbstractBinaryNode<T, AVLNode<T>> {
-    // keeps track of the height of this node.
-    //based purely on height; compare height of left and right trees for balancing.
+    /** The height of this node. */
     private int height;
 
     public AVLNode(T key) {
         super(key);
-        //a node with no children has the height of 1.
         height = 1;
     }
 
@@ -33,19 +52,15 @@ public class AVLNode<T extends Comparable<T>> extends AbstractBinaryNode<T, AVLN
 
     /** Resets the heights of this node and its ancestor, recursively. */
     public void resetHeights() {
-        //adjusts the height of this node and its ancestors, recursively.
         resetHeightsAux(this);
     }
 
     private void resetHeightsAux(AVLNode<T> node) {
         if (node != null) {
-            // retrieve the height of this node.
             int lh = node.hasLeftChild() ? node.getLeftChild().getHeight() : 0;
             int rh = node.hasRightChild() ? node.getRightChild().getHeight() : 0;
             int height = Math.max(lh, rh) + 1;
 
-            // resets the height of this node if different and
-            // makes the recursive call to its parent.
             if (height != node.getHeight()) {
                 node.setHeight(height);
                 resetHeightsAux(node.getParent());  // recursively update parent height
@@ -65,13 +80,7 @@ public class AVLNode<T extends Comparable<T>> extends AbstractBinaryNode<T, AVLN
             return 0;
     }
 
-    /**
-     * How can we tell if the node is unbalanced by using the balance factor?
-     * Tree is unbalanced if the getBalanceFactor is 2+ or (-2)-;
-     * +2-> unbalanced right
-     * -2 -> unbalanced left.
-     *
-     */
-
-
+    public String toString() {
+        return key + ":" + height + " -> (" + left_child + ", " + right_child + ")";
+    }
 }

@@ -1,12 +1,25 @@
+/*
+ * Copyright 2020 Emory University
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package edu.emory.cs.tree;
 
+/**
+ * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
+ */
 public class BinaryNode<T extends Comparable<T>> extends AbstractBinaryNode<T, BinaryNode<T>> {
-    // defines only 1 generic type T for the comparable key
-    // and passes itself for the generic type N to theAbstractBinaryNode class.
     public BinaryNode(T key) {
         super(key);
     }
-    // Is there any abstract method from AbstractBinaryNode to be defined in BinaryNode?
-    // No; we make it an abstract class because it is a concept; we don't want to instantiate it.
-    //
 }

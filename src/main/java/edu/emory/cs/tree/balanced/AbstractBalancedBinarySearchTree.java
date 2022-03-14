@@ -1,23 +1,26 @@
-package edu.emory.cs.tree;
+/*
+ * Copyright 2020 Emory University
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package edu.emory.cs.tree.balanced;
+
+import edu.emory.cs.tree.AbstractBinaryNode;
+import edu.emory.cs.tree.AbstractBinarySearchTree;
 
 /**
- *      search          insert      delete
- *      unbalanced      O(n)        O(n)                O(n) + beta
- *      balanced        O(logn)     O(logn) + alpha     O(logn) + beta
- * To ensure the O(n) complexity, it needs to be balanced at all time (or at most time).
- *
- *
- * 4 Cases of unbalanced trees to be considered
- * left linear -> 3, 2, 1
- * right linear -> 1, 2, 3
- * left zig-zag 3, 1, 2
- * right sigzag 1, 3, 2
- *
- * rotations of bst's to make balanced.
- *
+ * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
-
-
 public abstract class AbstractBalancedBinarySearchTree<T extends Comparable<T>, N extends AbstractBinaryNode<T, N>> extends AbstractBinarySearchTree<T, N> {
     /**
      * Rotates the specific node to the left.
@@ -38,7 +41,6 @@ public abstract class AbstractBalancedBinarySearchTree<T extends Comparable<T>, 
     /**
      * Rotates the specific node to the right.
      * @param node the node to be rotated.
-     * very similar to rotate left but just the mirror image.
      */
     protected void rotateRight(N node) {
         N child = node.getLeftChild();
@@ -52,23 +54,21 @@ public abstract class AbstractBalancedBinarySearchTree<T extends Comparable<T>, 
         child.setRightChild(node);
     }
 
+//	============================== Override ==============================
+
     @Override
     public N add(T key) {
-        //calls the add() method in the super class, AbstractBinarySearchTree
         N node = super.add(key);
-        //performs balancing on node that is just added.
         balance(node);
         return node;
     }
 
     @Override
     public N remove(T key) {
-
         N node = findNode(root, key);
 
         if (node != null) {
             N lowest = node.hasBothChildren() ? removeHibbard(node) : removeSelf(node);
-            //performs balancing on node that is the lowest node in the tree affected by this removal.
             if (lowest != null && lowest != node) balance(lowest);
         }
 
@@ -77,10 +77,7 @@ public abstract class AbstractBalancedBinarySearchTree<T extends Comparable<T>, 
 
     /**
      * Preserves the balance of the specific node and its ancestors.
-     * balances when needed
      * @param node the node to be balanced.
      */
-    //defines a balancing algorithm for a specific type of balanced binary search trees.
     protected abstract void balance(N node);
-    //need to check after add; need to check after remove
 }
