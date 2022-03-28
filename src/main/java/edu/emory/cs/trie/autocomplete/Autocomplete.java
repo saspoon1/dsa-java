@@ -16,7 +16,6 @@
 package edu.emory.cs.trie.autocomplete;
 
 import edu.emory.cs.trie.Trie;
-
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -26,7 +25,7 @@ import java.util.List;
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
-public abstract class Autocomplete<T> extends Trie<T> {
+public abstract class Autocomplete< T > extends Trie<T> {
     private final int max;
 
     /**

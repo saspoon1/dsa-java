@@ -2,7 +2,7 @@ package edu.emory.cs.trie;
 import java.util.Map;
 import java.util.HashMap;
 
-public class TrieNode<T> { //the generic type T represents the tupe of value
+public class TrieNode<T> { //the generic type T represents the type of value
     //Map is used to store the children
     private final Map<Character, TrieNode<T>> children;
     private TrieNode<T> parent;

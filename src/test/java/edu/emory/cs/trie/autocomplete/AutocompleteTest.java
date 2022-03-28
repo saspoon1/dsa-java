@@ -43,16 +43,18 @@ public class AutocompleteTest {
         List<String> expected;
 
         prefix = "sh";
-        expected = List.of("she", "ship", "shell");
+        expected = List.of("ship", "she", "shell", "school");
         testGetCandidates(ac, eval, prefix, expected);
 
         prefix = "sh";
-        expected = List.of("she", "ship", "shell", "school");
+        expected = List.of("ship", "she", "shell", "school");
         testGetCandidates(ac, eval, prefix, expected);
 
+
         prefix = "sh";
-        expected = List.of("ship", "she", "shell");
+        expected = List.of("ship", "she", "shell", "school");
         ac.pickCandidate(prefix, "ship");
+        ac.pickCandidate(prefix, "school");
         testGetCandidates(ac, eval, prefix, expected);
 
         System.out.printf("Score: %d/%d\n", eval.correct, eval.total);
