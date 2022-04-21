@@ -24,11 +24,12 @@ public class NetworkFlowQuizExtra {
 
         while (queue.size() != 0){
             subgraph = queue.poll();
-            vertex = subgraph.getEdges().get(0).getSource();
+            list = subgraph.getEdges();
+            vertex = subgraph.getEdges().get(list.size()-1).getSource();
             if (vertex == source){
                 output.add(subgraph);
             }
-            visited.add(vertex);
+            visited = getVisited(subgraph);
             list = graph.getIncomingEdges(vertex);
             for(Edge edge : list){
                 if (!visited.contains(edge.getSource()))
@@ -39,14 +40,29 @@ public class NetworkFlowQuizExtra {
         return output;
     }
 
+
+
     public Subgraph newSubgraph (Subgraph subgraph, Edge edge){
         Subgraph output = new Subgraph (subgraph);
         output.addEdge(edge);
         return output;
     }
 
+    public Set<Integer> getVisited(Subgraph subgraph){
+        Set<Integer> visited = new HashSet<>();
+        Edge edge;
+        List<Edge> list1 = subgraph.getEdges();
+        for (int i = 0; i < list1.size(); i++){
+            edge = list1.get(i);
+            visited.add( edge.getTarget() );
+        }
+        int last = list1.size()-1;
+        visited.add(list1.get(last).getSource());
+        return visited;
+    }
+
     public static void main(String[] args) {
-        NetworkFlowQuiz m = new NetworkFlowQuiz();
+        NetworkFlowQuizExtra m = new NetworkFlowQuizExtra();
         Graph graph = new Graph(6);
         int s = 0, t = 5;
 
